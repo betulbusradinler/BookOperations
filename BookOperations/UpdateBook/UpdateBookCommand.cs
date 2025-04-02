@@ -19,7 +19,10 @@ public class UpdateBookCommand
             .SingleOrDefault(x => x.Id == Id);
 
         if (book is null)
-            throw new InvalidDataException("Bu Kitap Mevcut Değil");
+            throw new InvalidDataException("Bu Kitap Mevcut Değil.");
+
+        if (Model.PageCount == 0)
+            throw new InvalidDataException("Sayfa Sayısı 0 Olamaz.");
 
         book.Title = Model.Title;
         book.PublishDate = Model.PublishDate;
@@ -34,7 +37,6 @@ public class UpdateBookCommand
 
 public class UpdateBookModel
 {
-   // public int Id { get; set; }
     public string Title { get; set; }
     public int GenreId { get; set; }
     public int PageCount { get; set; }

@@ -4,7 +4,6 @@ using BookOperations.DBOperations;
 namespace BookOperations.BookOperations.GetBookById;
 public class GetBooksByIdCommand
 {
-    public GetBooksByIdModel Model { get; set; }
     public int Id { get; set; }
 
     private readonly BookStoreDbContext _bookStoreDbContext;
@@ -18,7 +17,7 @@ public class GetBooksByIdCommand
         var book = _bookStoreDbContext.Books.SingleOrDefault(x => x.Id == Id);
 
         if (book is null)
-            throw new InvalidOperationException("Böyle Bir Kitap Mevcut Değil");
+            throw new InvalidOperationException("Bu Kitap Mevcut Değil");
 
         GetBooksByIdModel model = new GetBooksByIdModel
         {
