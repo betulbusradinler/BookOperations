@@ -4,7 +4,6 @@ using BookOperations.DBOperations;
 namespace BookOperations.BookOperations.GetBookById;
 public class GetBooksByIdCommand
 {
-    public GetBooksByIdModel Model { get; set; }
     public int Id { get; set; }
 
     private readonly BookStoreDbContext _bookStoreDbContext;

@@ -18,6 +18,9 @@ public class UpdateBookCommand
             .Books
             .SingleOrDefault(x => x.Id == Id);
 
+        if (Model.PageCount<=0)
+            throw new InvalidDataException("Sayfa Sayısı 0 dan Küçük Olamaz");
+
         if (book is null)
             throw new InvalidDataException("Bu Kitap Mevcut Değil");
 
