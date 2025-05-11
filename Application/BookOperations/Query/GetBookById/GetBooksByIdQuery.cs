@@ -4,13 +4,13 @@ using BookOperations.DBOperations;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookOperations.Application.GetBookById;
-public class GetBooksByIdCommand
+public class GetBooksByIdQuery
 {
     public int Id { get; set; }
 
     private readonly BookStoreDbContext _bookStoreDbContext;
     private readonly IMapper _mapper;
-    public GetBooksByIdCommand(BookStoreDbContext bookStoreDbContext, IMapper mapper)
+    public GetBooksByIdQuery(BookStoreDbContext bookStoreDbContext, IMapper mapper)
     {
         _bookStoreDbContext = bookStoreDbContext;
         _mapper = mapper;

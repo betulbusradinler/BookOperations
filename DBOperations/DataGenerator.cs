@@ -23,11 +23,29 @@ public class DataGenerator
                     Name = " Romance "
                 }
             );
+            context.Authors.AddRange(
+                new Author{
+                    Name="Eric",
+                    LastName = "RIES",
+                    BirthDay = new DateTime(1981,01,02)
+                },
+                new Author{
+                    Name="Charlotte",
+                    LastName = "Perkins",
+                    BirthDay = new DateTime(1982,03,04)
+                },
+                new Author{
+                    Name="Frank",
+                    LastName = "Herbert",
+                    BirthDay = new DateTime(1982,05,06)
+                }
+            );
             context.Books.AddRange(
                 new Book
                 {
                     Title = "Lean Startup",
                     GenreId = 1, // Personal Growtn
+                    AuthorId = 1,
                     PageCount = 200,
                     PublishDate = new DateTime(2001, 06, 12)
                 },
@@ -36,6 +54,7 @@ public class DataGenerator
                 {
                     Title = "Herland",
                     GenreId = 2,// Science Fiction
+                    AuthorId = 2,
                     PageCount = 250,
                     PublishDate = new DateTime(2010, 05, 23)
                 },
@@ -44,6 +63,7 @@ public class DataGenerator
                 {
                     Title = "Dune",
                     GenreId = 1, // Science Fiction
+                    AuthorId = 3,
                     PageCount = 540,
                     PublishDate = new DateTime(2001, 12, 21)
                 }

@@ -3,11 +3,9 @@ using FluentValidation;
 
 namespace BookOperations.Application.BookOperations.Query.GetBookById
 {
-    public class GetBooksByIdCommandValidator:AbstractValidator<GetBooksByIdCommand>
+    public class GetBooksByIdQueryValidator:AbstractValidator<GetBooksByIdQuery>
     {
-        public int Id { get; set; }
-
-        public GetBooksByIdCommandValidator()
+        public GetBooksByIdQueryValidator()
         {
             RuleFor(command => command.Id).GreaterThan(0);
         }

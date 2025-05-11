@@ -1,10 +1,15 @@
 ﻿using AutoMapper;
+using BookOperations.Application.AuthorOperations.Commands.CreateAuthor;
+using BookOperations.Application.AuthorOperations.Query.GetAuthorById;
+using BookOperations.Application.BookOperations.Commands.CreateBook;
 using BookOperations.Application.BookOperations.DeleteBook;
+using BookOperations.Application.BookOperations.Query.GetBookById;
 using BookOperations.Application.CreateBook;
 using BookOperations.Application.GetBookById;
 using BookOperations.Application.GetBooks;
 using BookOperations.Application.UpdateBook;
 using BookOperations.DBOperations;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookOperations.Controllers;
@@ -32,8 +37,10 @@ public class BookController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult Get(int id)
     {
-        GetBooksByIdCommand command = new GetBooksByIdCommand(_context,_mapper);
+        GetBooksByIdQuery command = new(_context,_mapper);
         command.Id = id;
+        GetBooksByIdQueryValidator validator = new();
+        validator.ValidateAndThrow(command);
         var result = command.Handle();
         return Ok(result);
 
@@ -44,6 +51,8 @@ public class BookController : ControllerBase
     {
         CreateBookCommand command = new CreateBookCommand(_context,_mapper);
         command.Model = newBook;
+        CreateBookCommandValidator validator = new();
+        validator.ValidateAndThrow(command);
         command.Handle();
         return StatusCode(201,"Created");
     }
@@ -63,6 +72,8 @@ public class BookController : ControllerBase
     {
         DeleteBookCommand deleteBookCommand = new DeleteBookCommand(_context);
         deleteBookCommand.BookId = id;
+        DeleteBookCommandValidator validator = new();
+        validator.ValidateAndThrow(deleteBookCommand);
         deleteBookCommand.Handle();
         return Ok();
     }

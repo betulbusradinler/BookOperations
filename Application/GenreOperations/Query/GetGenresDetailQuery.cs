@@ -15,7 +15,7 @@ public class GetGenresDetailQuery {
     public  GenreDetailViewModel Handle (){
         var genre = _context.Genres.SingleOrDefault(x=>x.IsActive && x.Id == GenreID);
         if(genre is null)
-        throw new InvalidOperationException("Kitap Türü Bulunmadı!");
+            throw new InvalidOperationException("Kitap Türü Bulunmadı!");
         GenreDetailViewModel returnObj = _mapper.Map<GenreDetailViewModel>(genre);
         return returnObj;
     }
