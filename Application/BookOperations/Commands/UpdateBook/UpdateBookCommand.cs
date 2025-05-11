@@ -1,6 +1,6 @@
 ﻿using BookOperations.DBOperations;
 
-namespace BookOperations.BookOperations.UpdateBook;
+namespace BookOperations.Application.UpdateBook;
 public class UpdateBookCommand
 {
     public UpdateBookModel Model { get; set; }

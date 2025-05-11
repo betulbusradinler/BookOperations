@@ -1,31 +1,29 @@
-﻿using BookOperations.DBOperations;
+﻿using AutoMapper;
+using BookOperations.DBOperations;
+using BookOperations.Entities;
 
-namespace BookOperations.BookOperations.CreateBook;
+namespace BookOperations.Application.CreateBook;
 public class CreateBookCommand
 {
     public CreateBookModel Model { get; set; }
     private readonly BookStoreDbContext bookStoreDbContext;
-    public CreateBookCommand(BookStoreDbContext bookStoreDbContext)
+    private readonly IMapper _mapper;
+    public CreateBookCommand(BookStoreDbContext bookStoreDbContext, IMapper mapper)
     {
         this.bookStoreDbContext = bookStoreDbContext;
+        _mapper = mapper;
     }
 
     public void Handle()
     {
+        var mapBook = _mapper.Map<Book>(Model);
         var book = bookStoreDbContext
             .Books
             .SingleOrDefault(x => x.Title == Model.Title);
         if (book is not null)
             throw new InvalidOperationException("Kitap zaten mevcut");
-        book = new Book
-        {
-            Title = Model.Title,
-            PublishDate = Model.PublishDate,
-            PageCount = Model.PageCount,
-            GenreId = Model.GenreId
-        };
 
-        bookStoreDbContext.Books.Add(book);
+        bookStoreDbContext.Books.Add(mapBook);
         bookStoreDbContext.SaveChanges();
     }
 

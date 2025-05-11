@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BookOperations.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookOperations.DBOperations;
 public class DataGenerator
@@ -11,7 +12,17 @@ public class DataGenerator
             {
                 return;
             }
-
+            context.Genres.AddRange(
+                new Genre {
+                    Name = " Personal Growth "
+                },
+                new Genre {
+                    Name = " Science Fiction "
+                }, 
+                new Genre {
+                    Name = " Romance "
+                }
+            );
             context.Books.AddRange(
                 new Book
                 {

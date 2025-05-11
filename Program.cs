@@ -1,3 +1,4 @@
+using BookOperations.Common;
 using BookOperations.DBOperations;
 using BookOperations.Middleware;
 using BookOperations.Services;
@@ -13,6 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<BookStoreDbContext>(options => options.UseInMemoryDatabase(databaseName: "BookStoreDB"));
 builder.Services.AddSingleton<ILoggerService,ConsoleLogger>();
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 
 var app = builder.Build();
